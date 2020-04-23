@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+<channel>
+<title>Unofficial Jeff Ward Show Podcast</title>
+<link>https://omny.fm/shows/the-jeff-ward-show</link>
+<language>en-us</language>
+<itunes:subtitle>The Jeff Ward Show from Austin, Texas</itunes:subtitle>
+<itunes:author>Jeff Ward</itunes:author>
+<itunes:summary>Talk Show Host Jeff Ward - Austin, Texas.  From the Austin American Statesman.</itunes:summary>
+<description>Talk Show Host Jeff Ward - Austin, Texas.  From the Austin American Statesman.</description>
+<itunes:owner>
+    <itunes:name>Fool's Gold</itunes:name>
+    <itunes:email>arcadecoffee_mgmt@gmail.com</itunes:email>
+</itunes:owner>
+<itunes:explicit>no</itunes:explicit>
+<itunes:image href="https://www.omnycontent.com/d/playlist/a858b0a5-e5e6-4a14-9717-a70b010facc1/83f7871a-2d1a-476d-960e-ab900100b58c/9ab070eb-384d-448f-ac06-ab900100f955/image.jpg?t=1587494117&size=Large" />
+<itunes:category text="Category Name">Entertainment News</itunes:category>
+
+{% for episode in episodes | sort(attribute='date', reverse=True) %}
+<item>
+    <title>The Jeff Ward Show {{ episode.date.strftime('%Y-%m-%d') }}</title>
+    <itunes:summary>{{ episode.date.strftime('%Y-%m-%d') }}</itunes:summary>
+    <description>{{ episode.date.strftime('%Y-%m-%d') }}</description>
+    <link>https://omny.fm/shows/the-jeff-ward-show</link>
+    <enclosure url="{{ media_host_url }}/{{ episode.filename }}" type="audio/mpeg" length="{{ episode.size }}"></enclosure>
+    <pubDate>{{ episode.date.strftime('%a, %b %d %Y %H:%M:%S %z') }}</pubDate>
+    <itunes:author>Jeff Ward</itunes:author>
+    <itunes:duration>{{ episode.duration }}</itunes:duration>
+    <itunes:explicit>no</itunes:explicit>
+    <guid>{{ media_host_url }}/{{ episode.filename }}</guid>
+</item>
+{% endfor %}
+
+</channel>
+</rss>
