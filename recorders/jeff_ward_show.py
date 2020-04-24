@@ -66,4 +66,3 @@ def record_show(dest_filename='jeff_ward_show.mp3', duration=show_length):
 
         os.makedirs(os.path.dirname(dest_filename), exist_ok=True)
         shutil.move(incoming_file.name, dest_filename)
-        os.chmod(dest_filename, 0o644)
