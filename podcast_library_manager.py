@@ -3,6 +3,7 @@ import os
 from datetime import datetime, timedelta
 
 import eyed3
+from dateutil.tz import gettz
 from jinja2 import Template
 
 
@@ -20,7 +21,7 @@ class PodcastCollection:
                 filepath = os.path.join(directory, filename)
                 mp3file = eyed3.load(filepath)
                 self.episodes.append({
-                    'date': datetime.fromisoformat(str(mp3file.tag.recording_date)),
+                    'date': datetime.fromisoformat(str(mp3file.tag.recording_date)).replace(tzinfo=gettz()),
                     'size': mp3file.info.size_bytes,
                     'duration': timedelta(seconds=int(mp3file.info.time_secs)),
                     'filename': filename,
@@ -30,7 +31,8 @@ class PodcastCollection:
 
     def purge_old_episodes(self, max_age):
         if max_age:
-            episodes_to_purge = list(filter(lambda e: datetime.now() - e['date'] > max_age, self.episodes))
+            episodes_to_purge = \
+                list(filter(lambda e: datetime.now().replace(tzinfo=gettz()) - e['date'] > max_age, self.episodes))
             logging.info(f'found {len(episodes_to_purge)} episodes to purge')
             for episode in episodes_to_purge:
                 logging.info(f'removing {episode["filename"]}')
