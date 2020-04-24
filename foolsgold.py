@@ -9,7 +9,7 @@ media_directory = os.path.join('media', 'jeff_ward_show')
 media_host_url = 'http://foolsgold.arcadecoffee.com/media/jeff_ward_show'
 rss_template = os.path.join('templates', 'jeff_ward_show.rss.jinja2')
 rss_output = os.path.join('rss', 'jeff_ward_show.rss')
-episode_length = timedelta(seconds=3)
+episode_length = timedelta(hours=3)
 max_episode_age = timedelta(days=7)
 
 logging.basicConfig(format='%(asctime)s %(message)s', level=logging.INFO)
